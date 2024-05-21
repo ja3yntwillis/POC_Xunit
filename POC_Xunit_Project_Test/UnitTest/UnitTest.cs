@@ -14,38 +14,57 @@ namespace POC_Xunit_Project.Tests
     public class OperationTests
     {
         private IAdd _addMock;
+        private IAdd _add2Real;
         private IAdd _add2Mock;
         private IDivision _divisionMock;
         private IMultiplication _multiplicationMock;
         private ISubstraction _substractionMock;
         private Operation _operation;
 
+
         public OperationTests()
         {
-            _addMock = Substitute.For<IAdd>();
-            _add2Mock = Substitute.For<IAdd>();
+
+            //type mocking
+             _addMock = Substitute.For<IAdd>();// is a moq
+           // _add2Mock = Substitute.For<IAdd>();
+            _add2Real = new Addd();
             _divisionMock = Substitute.For<IDivision>();
             _multiplicationMock = Substitute.For<IMultiplication>();
             _substractionMock = Substitute.For<ISubstraction>();
 
-            _operation = new Operation(_addMock, _add2Mock, _divisionMock, _multiplicationMock, _substractionMock);
+            _operation = new Operation(_addMock, _add2Real, _divisionMock, _multiplicationMock, _substractionMock);
         }
 
         [Fact]
-        public void CalculateMultipleOperations_ShouldReturnCorrectResults()
+        public void CalculateMultipleOperations_RealPositive_ShouldReturnCorrectResultCheckingTheValidAdditionOperation()//is realpositive or realnegative or false,false
         {
             // Arrange
-            int x = 2, y = 3, z = 3;
-            _add2Mock.addition(x, y, z).Returns(8);
-            _substractionMock.substract(8, x).Returns(7);
-            _multiplicationMock.multiply(7, 1, 1).Returns(7);
+            int x = 2, y = 3, z = 5;
+
+           // _add2Mock.addition(x, y, z).Returns(8);
+            var sum= _add2Real.addition(x, y, z);
+            //behaviour mocking
+            _substractionMock.substract(10, x).Returns(9);//returns overload understanding- exception situations
+            _multiplicationMock.multiply(9, 1, 1).Returns(7);
             _divisionMock.div(7, 5).Returns(1);
+
+            
+            //public List<int> CalculateMultipleOperations(int x, int y, int z)
+            //{
+            //    var sum = _add2.addition(x, y, z);
+            //    var subs = _substraction.substract(sum, x);
+            //    var multi = _multiplication.multiply(subs, 1, 1);
+            //    var div = _division.div(multi, 5);
+            //    var summation = new List<int> { sum, subs, multi, div };
+            //    return summation;
+            //}
 
             // Act
             var result = _operation.CalculateMultipleOperations(x, y, z);
 
             // Assert
-            result.Should().BeEquivalentTo(new List<int> { 8, 7, 7, 1 });
+            result.Should().BeEquivalentTo(new List<int> { 10, 9, 7, 1 });
         }
 
         [Fact]
