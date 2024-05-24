@@ -7,6 +7,7 @@ using POC_Xunit_Project.Multiplication;
 using POC_Xunit_Project.Substraction;
 using POC_Xunit_Project.Operations;
 using System.Collections.Generic;
+using Assert = Xunit.Assert;
 
 namespace POC_Xunit_Project.Tests
 {
@@ -50,14 +51,12 @@ namespace POC_Xunit_Project.Tests
             var result = _operation.CalculateMultipleOperations(x, y, z);
             
             //real line
-            result.Should().BeEquivalentTo(new List<int> { 13, 9, 7, 1 });
+            result.Should().Equal(new List<int> { 1,13, 9, 7 });
+            //Mock recieved
+            _multiplicationMock.Received().multiply(9, 1, 1);
+            _multiplicationMock.DidNotReceive().multiply(9, 1, 2);
+            //
 
-                //var sum = _add2.addition(x, y, z);
-                //var subs = _substraction.substract(sum, x);
-                //var multi = _multiplication.multiply(subs, 1, 1);
-                //var div = _division.div(multi, 5);
-                //var summation = new List<int> { sum, subs, multi, div };
-                //return summation;
         }
 
         [Fact]
