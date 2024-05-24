@@ -39,32 +39,25 @@ namespace POC_Xunit_Project.Tests
         [Fact]
         public void CalculateMultipleOperations_RealPositive_ShouldReturnCorrectResultCheckingTheValidAdditionOperation()//is realpositive or realnegative or false,false
         {
-            // Arrange
-            int x = 2, y = 3, z = 5;
+            int x = 2, y = 3, z = 8;
+           // _add2Real.addition(x, y, z);
 
-           // _add2Mock.addition(x, y, z).Returns(8);
-            var sum= _add2Real.addition(x, y, z);
             //behaviour mocking
-            _substractionMock.substract(10, x).Returns(9);//returns overload understanding- exception situations
             _multiplicationMock.multiply(9, 1, 1).Returns(7);
+            _substractionMock.substract(13, x).Returns(9);//returns overload understanding- exception situations
             _divisionMock.div(7, 5).Returns(1);
-
-            
-            //public List<int> CalculateMultipleOperations(int x, int y, int z)
-            //{
-            //    var sum = _add2.addition(x, y, z);
-            //    var subs = _substraction.substract(sum, x);
-            //    var multi = _multiplication.multiply(subs, 1, 1);
-            //    var div = _division.div(multi, 5);
-            //    var summation = new List<int> { sum, subs, multi, div };
-            //    return summation;
-            //}
-
-            // Act
+            _add2Real.addition(x, y, z);
             var result = _operation.CalculateMultipleOperations(x, y, z);
+            
+            //real line
+            result.Should().BeEquivalentTo(new List<int> { 13, 9, 7, 1 });
 
-            // Assert
-            result.Should().BeEquivalentTo(new List<int> { 10, 9, 7, 1 });
+                //var sum = _add2.addition(x, y, z);
+                //var subs = _substraction.substract(sum, x);
+                //var multi = _multiplication.multiply(subs, 1, 1);
+                //var div = _division.div(multi, 5);
+                //var summation = new List<int> { sum, subs, multi, div };
+                //return summation;
         }
 
         [Fact]
