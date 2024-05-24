@@ -30,7 +30,7 @@ namespace POC_Xunit_Project.Operations
             var subs = _substraction.substract(sum, x);
             var multi = _multiplication.multiply(subs, 1, 1);
             var div = _division.div(multi, 5);
-            var summation = new List<int> { sum, subs, multi, div };
+            var summation = new List<int> { div,sum, subs, multi };
             return summation;
         }
 
