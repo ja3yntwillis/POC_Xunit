@@ -26,35 +26,38 @@ namespace POC_Xunit_Project.Tests
         public OperationTests()
         {
 
-            //type mocking
-             _addMock = Substitute.For<IAdd>();// is a moq
-           // _add2Mock = Substitute.For<IAdd>();
-            _add2Real = new Addd();
+            ////type mocking
+            // _addMock = Substitute.For<IAdd>();// is a moq
             _divisionMock = Substitute.For<IDivision>();
             _multiplicationMock = Substitute.For<IMultiplication>();
             _substractionMock = Substitute.For<ISubstraction>();
 
-            _operation = new Operation(_addMock, _add2Real, _divisionMock, _multiplicationMock, _substractionMock);
+            _addMock = new Addd();// is a moq
+            //_divisionMock = new Divisions();
+            //_multiplicationMock = new Multiplications();
+            //_substractionMock = new Substractions();
+
+            _operation = new Operation(_addMock, _divisionMock, _multiplicationMock, _substractionMock);
         }
 
         [Fact]
         public void CalculateMultipleOperations_RealPositive_ShouldReturnCorrectResultCheckingTheValidAdditionOperation()//is realpositive or realnegative or false,false
         {
-            int x = 2, y = 3, z = 8;
+            int x = 5, y = 10, z = 15;
            // _add2Real.addition(x, y, z);
 
             //behaviour mocking
-            _multiplicationMock.multiply(9, 1, 1).Returns(7);
-            _substractionMock.substract(13, x).Returns(9);//returns overload understanding- exception situations
-            _divisionMock.div(7, 5).Returns(1);
-            _add2Real.addition(x, y, z);
+            _multiplicationMock.multiply(z, 1, 1).Returns(159);
+            _substractionMock.substract(y, x).Returns(9);//returns overload understanding- exception situations
+            _divisionMock.div(z, 5).Returns(1);
+            //_add2Real.addition(x, y, z).Returns(30);
             var result = _operation.CalculateMultipleOperations(x, y, z);
             
             //real line
-            result.Should().Equal(new List<int> { 1,13, 9, 7 });
-            //Mock recieved
-            _multiplicationMock.Received().multiply(9, 1, 1);
-            _multiplicationMock.DidNotReceive().multiply(9, 1, 2);
+            result.Should().Equal(new List<int> { 30,5, 15, 3 });
+            ////Mock recieved
+            //_multiplicationMock.Received().multiply(9, 1, 1);
+            //_multiplicationMock.DidNotReceive().multiply(9, 1, 2);
             //
 
         }

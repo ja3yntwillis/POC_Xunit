@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POC_Xunit_Project.Substraction
 {
-    internal class Substractions:ISubstraction
+    public class Substractions:ISubstraction
     {
         public int x;
         public int y;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POC_Xunit_Project.Multiplication
 {
-    internal class Multiplications:IMultiplication
+    public class Multiplications:IMultiplication
     {
         public int x;
         public int y;

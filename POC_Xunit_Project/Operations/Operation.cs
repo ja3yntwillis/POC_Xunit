@@ -10,27 +10,25 @@ namespace POC_Xunit_Project.Operations
     public class Operation : IOperation
     {
         IAdd _add;
-        IAdd _add2;
         IDivision _division;
         IMultiplication _multiplication;
         ISubstraction _substraction;
 
-        public Operation(IAdd add, IAdd add2, IDivision division, IMultiplication multiplication, ISubstraction substraction)
+        public Operation(IAdd add, IDivision division, IMultiplication multiplication, ISubstraction substraction)
         {
             _add = add;
-            _add2 = add2;
             _division = division;
             _multiplication = multiplication;
             _substraction = substraction;
         }
-
+        //5,10,15
         public List<int> CalculateMultipleOperations(int x, int y, int z)
         {
-            var sum = _add2.addition(x, y, z);
-            var subs = _substraction.substract(sum, x);
-            var multi = _multiplication.multiply(subs, 1, 1);
-            var div = _division.div(multi, 5);
-            var summation = new List<int> { div,sum, subs, multi };
+            var sum = _add.addition(x, y, z);
+            var subs = _substraction.substract(y, x);
+            var multi = _multiplication.multiply(z, 1, 1);
+            var div = _division.div(z, 5);
+            var summation = new List<int> { sum, subs, multi, div };
             return summation;
         }
 

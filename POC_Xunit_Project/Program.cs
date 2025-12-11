@@ -7,7 +7,7 @@ using POC_Xunit_Project.Substraction;
 static void main()
 {
 
-    Operation ob = new Operation(new Addd(), new Addd(2, 3), new Divisions(), new Multiplications(), new Substractions()) ;
+    Operation ob = new Operation(new Addd(), new Divisions(), new Multiplications(), new Substractions()) ;
     List<int> intList = new List<int>();
     intList = ob.CalculateMultipleOperations(2, 3, 4);
 

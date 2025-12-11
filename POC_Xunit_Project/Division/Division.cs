@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace POC_Xunit_Project.Division
 {
-    internal class Divisions : IDivision
+    public class Divisions : IDivision
     {
         public int x;
         public int y;
